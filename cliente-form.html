@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro Cliente</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Cadastro de Cliente</h1>
+
+<input id="nome" placeholder="Nome / Razão Social">
+<input id="fantasia" placeholder="Nome Fantasia">
+
+<select id="tipoPessoa">
+  <option value="PF">Pessoa Física</option>
+  <option value="PJ">Pessoa Jurídica</option>
+</select>
+
+<input id="documento" placeholder="CPF / CNPJ">
+<input id="inscricao" placeholder="RG / Inscrição Estadual">
+
+<h3>Endereço</h3>
+<input id="rua" placeholder="Rua">
+<input id="numero" placeholder="Número">
+<input id="bairro" placeholder="Bairro">
+<input id="cidade" placeholder="Cidade">
+<input id="estado" placeholder="Estado">
+<input id="cep" placeholder="CEP">
+
+<h3>Contato</h3>
+<input id="telefone" placeholder="Telefone">
+<input id="celular" placeholder="Celular">
+<input id="email" placeholder="Email">
+
+<button onclick="salvar()">Salvar</button>
+<button onclick="voltar()">Cancelar</button>
+
+<script src="js/clientes.js"></script>
+</body>
+</html>
