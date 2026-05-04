@@ -6,32 +6,31 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Clientes</h1>
 
-  <input id="nome" placeholder="Nome">
-  <button onclick="addCliente()">Adicionar</button>
+<h1>Clientes</h1>
 
-  <ul id="lista"></ul>
+<button onclick="window.location.href='cliente-form.html'">Incluir</button>
 
-  <script>
-    let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
+<ul id="lista"></ul>
 
-    function render(){
-      const lista = document.getElementById("lista");
-      lista.innerHTML = "";
-      clientes.forEach(c => {
-        lista.innerHTML += `<li>${c}</li>`;
-      });
-    }
+<script>
+let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
 
-    function addCliente(){
-      const nome = document.getElementById("nome").value;
-      clientes.push(nome);
-      localStorage.setItem("clientes", JSON.stringify(clientes));
-      render();
-    }
+function render(){
+  const lista = document.getElementById("lista");
+  lista.innerHTML = "";
 
-    render();
-  </script>
+  clientes.forEach(c => {
+    lista.innerHTML += `
+      <li>
+        ${c.nome} - ${c.contato?.celular || ""}
+      </li>
+    `;
+  });
+}
+
+render();
+</script>
+
 </body>
 </html>
