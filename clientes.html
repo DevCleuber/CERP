@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Clientes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Clientes</h1>
+
+  <input id="nome" placeholder="Nome">
+  <button onclick="addCliente()">Adicionar</button>
+
+  <ul id="lista"></ul>
+
+  <script>
+    let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
+
+    function render(){
+      const lista = document.getElementById("lista");
+      lista.innerHTML = "";
+      clientes.forEach(c => {
+        lista.innerHTML += `<li>${c}</li>`;
+      });
+    }
+
+    function addCliente(){
+      const nome = document.getElementById("nome").value;
+      clientes.push(nome);
+      localStorage.setItem("clientes", JSON.stringify(clientes));
+      render();
+    }
+
+    render();
+  </script>
+</body>
+</html>

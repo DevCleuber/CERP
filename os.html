@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Ordem de Serviço</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Ordem de Serviço</h1>
+
+  <input id="aparelho" placeholder="Aparelho">
+  <input id="defeito" placeholder="Defeito">
+
+  <button onclick="addOS()">Salvar</button>
+
+  <ul id="lista"></ul>
+
+  <script>
+    let ordens = JSON.parse(localStorage.getItem("os")) || [];
+
+    function render(){
+      const lista = document.getElementById("lista");
+      lista.innerHTML = "";
+      ordens.forEach(o => {
+        lista.innerHTML += `<li>${o.aparelho} - ${o.defeito}</li>`;
+      });
+    }
+
+    function addOS(){
+      const aparelho = document.getElementById("aparelho").value;
+      const defeito = document.getElementById("defeito").value;
+
+      ordens.push({aparelho, defeito});
+      localStorage.setItem("os", JSON.stringify(ordens));
+      render();
+    }
+
+    render();
+  </script>
+</body>
+</html>

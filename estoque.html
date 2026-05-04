@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Estoque</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Estoque</h1>
+
+  <input id="produto" placeholder="Produto">
+  <button onclick="addProduto()">Adicionar</button>
+
+  <ul id="lista"></ul>
+
+  <script>
+    let produtos = JSON.parse(localStorage.getItem("produtos")) || [];
+
+    function render(){
+      const lista = document.getElementById("lista");
+      lista.innerHTML = "";
+      produtos.forEach(p => {
+        lista.innerHTML += `<li>${p}</li>`;
+      });
+    }
+
+    function addProduto(){
+      const nome = document.getElementById("produto").value;
+      produtos.push(nome);
+      localStorage.setItem("produtos", JSON.stringify(produtos));
+      render();
+    }
+
+    render();
+  </script>
+</body>
+</html>
