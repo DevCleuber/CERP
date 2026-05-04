@@ -9,6 +9,31 @@ async function buscarCNPJ() {
     return;
   }
 
+  cnpj = cnpj.replace(/\D/g, "");
+
+  try {
+    const url = `https://api.allorigins.win/raw?url=https://www.receitaws.com.br/v1/cnpj/${cnpj}`;
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (data.status === "ERROR") {
+      alert("CNPJ não encontrado");
+      return;
+    }
+
+    document.getElementById("nome").value = data.nome || "";
+    document.getElementById("fantasia").value = data.fantasia || "";
+    document.getElementById("rua").value = data.logradouro || "";
+    document.getElementById("bairro").value = data.bairro || "";
+    document.getElementById("cidade").value = data.municipio || "";
+    document.getElementById("estado").value = data.uf || "";
+    document.getElementById("cep").value = data.cep || "";
+
+  } catch (e) {
+    alert("Erro ao buscar CNPJ");
+  }
+}
+
   // remove caracteres
   cnpj = cnpj.replace(/\D/g, "");
 
