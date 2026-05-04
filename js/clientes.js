@@ -1,5 +1,40 @@
 let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
 
+// 🔍 BUSCAR CNPJ
+async function buscarCNPJ() {
+  let cnpj = document.getElementById("documento").value;
+
+  if (!cnpj) {
+    alert("Digite o CNPJ");
+    return;
+  }
+
+  // remove caracteres
+  cnpj = cnpj.replace(/\D/g, "");
+
+  try {
+    const res = await fetch(`https://www.receitaws.com.br/v1/cnpj/${cnpj}`);
+    const data = await res.json();
+
+    if (data.status === "ERROR") {
+      alert("CNPJ não encontrado");
+      return;
+    }
+
+    document.getElementById("nome").value = data.nome || "";
+    document.getElementById("fantasia").value = data.fantasia || "";
+    document.getElementById("rua").value = data.logradouro || "";
+    document.getElementById("bairro").value = data.bairro || "";
+    document.getElementById("cidade").value = data.municipio || "";
+    document.getElementById("estado").value = data.uf || "";
+    document.getElementById("cep").value = data.cep || "";
+
+  } catch (e) {
+    alert("Erro ao buscar CNPJ (API pode estar bloqueando)");
+  }
+}
+
+// 💾 SALVAR CLIENTE
 function salvar(){
   const cliente = {
     id: Date.now(),
@@ -35,6 +70,7 @@ function salvar(){
   window.location.href = "clientes.html";
 }
 
+// 🔙 VOLTAR
 function voltar(){
   window.location.href = "clientes.html";
 }
